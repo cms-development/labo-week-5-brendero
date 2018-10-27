@@ -1,0 +1,12 @@
+.add-post-btn {
+  position: fixed;
+  right: 5%;
+  top: 5%;
+  background: #68EFAD;
+  font-weight: bold;
+  z-index: 999;
+}
+.post-title {
+  margin: 50px;
+  margin-top: 76px;
+}

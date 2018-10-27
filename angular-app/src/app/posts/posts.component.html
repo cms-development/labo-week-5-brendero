@@ -1,0 +1,19 @@
+<h1 class="post-title">
+  posts
+</h1>
+
+<a class='btn-floating btn-large waves-effect waves-light add-post-btn' routerLink="/posts/add"><i class="material-icons">add</i></a>
+<div class="container" >
+  <ul class="collection">
+    <li class="collection-item avatar" *ngFor="let post of posts">
+      <div *ngFor="let include of includes">
+          <img *ngIf="include.id==post.relationships.field_image.data.id" src="http://localhost/{{include.attributes.url}}" alt="" class="circle">
+      </div>
+      <a routerLink="/posts/{{post.id}}"><span class="title">{{post.attributes.title}}</span></a>
+      <p><span *ngFor="let include of includes"><span *ngIf="include.id==post.relationships.revision_uid.data.id">{{include.attributes.name}}</span></span><br>
+        {{post.attributes.revision_timestamp * 1000 | date:'yyyy-MM-dd HH:mm' }}
+      </p>
+      <a routerLink="/posts/{{post.id}}/edit" class="secondary-content"><i class="material-icons">create</i></a>
+    </li>
+    </ul>
+</div>
