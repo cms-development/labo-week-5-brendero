@@ -1,3 +1,4 @@
+import { Json } from './../Json';
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
@@ -10,7 +11,7 @@ import { Post } from '../post';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded',
     'Authorization': `Bearer ${localStorage.getItem('access_token')}`
    })
 };
@@ -31,6 +32,7 @@ export class PostService {
 
   // TODO: CREATE
   addPost(post: Post): Observable<Post> {
+    console.log(post);
     return this.http.post<Post>('http://localhost/jsonapi/node/article', post, httpOptions)
           .pipe(
             tap((post: Post) => this.log(`added new post with id ${post.id}`)),
@@ -59,10 +61,11 @@ export class PostService {
   }
 
   // UPDATE
-  updatePost (post: Post): Observable<any> {
-    return this.http.put(`http://localhost/jsonapi/node/article/${post.id}`, post, httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${post.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+  updatePost (post: Post): Observable<Post> {
+    return this.http.patch(`http://localhost/jsonapi/node/article/${post.data.id}`, post, httpOptions)
+    .pipe(
+      tap(_ => this.log(`updated Post with id=${post.id}`)),
+      catchError(this.handleError<any>('updatePost'))
     );
   }
 

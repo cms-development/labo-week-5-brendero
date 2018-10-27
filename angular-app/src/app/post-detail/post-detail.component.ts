@@ -24,8 +24,9 @@ export class PostDetailComponent implements OnInit {
   }
 
   delete(post: Post): void {
-    this.posts = this.posts.filter(p => p !== post);
-    this.postService.deletePost(post).subscribe();
+    this.postService.deletePost(post).subscribe(
+      () => this.goBack()
+    );
   }
 
   getPost(): void {
@@ -38,6 +39,10 @@ export class PostDetailComponent implements OnInit {
         .subscribe(
           post => this.includes = post.included
         );
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

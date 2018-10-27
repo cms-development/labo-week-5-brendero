@@ -1,6 +1,16 @@
 export class Post {
-  id: string;
-  field_image: string;
+  id?: string;
+  type: string = 'node--article';
+  attributes: Attributes;
+}
+
+export class Attributes {
   title: string;
-  data: Post;
+  body: Body;
+}
+
+export class Body {
+  value: string;
+  format: string = 'plain_text';
+  summary: string;
 }

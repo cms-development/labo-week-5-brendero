@@ -32,6 +32,7 @@ export class AuthService {
                   .set('password', password);
 
     return this.http.post<User>(this.tokenUrl, httpBody, httpOptions);
+
   }
 
 }

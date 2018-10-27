@@ -1,3 +1,35 @@
-<p>
-  post-add works!
-</p>
+<div class="container form-wrapper">
+
+  <h1>Add a new post</h1>
+
+  <form (ngSubmit)="addPost()">
+
+    <div class="input-field">
+      <input id="title" name="title" type="text" class="validate" [(ngModel)]="title">
+      <label for="title">Titel</label>
+    </div>
+
+    <div class="input-field">
+      <textarea id="content" name="content" class="materialize-textarea" [(ngModel)]="content"></textarea>
+      <label for="content">Inhoud</label>
+    </div>
+
+    <div class="input-field">
+      <input id="summary" name="summary" type="text" class="validate" [(ngModel)]="summary">
+      <label for="summary">Samenvatting</label>
+    </div>
+
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+
+    <button class="btn waves-effect waves-light login-btn" type="submit">submit</button>
+  </form>
+</div>

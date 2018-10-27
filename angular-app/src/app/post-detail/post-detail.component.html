@@ -9,20 +9,18 @@
           <li class="collection-item avatar">
             <!-- TODO: FIX user image -->
             <span *ngFor="let user of includes">
-              <img *ngIf="user.id==include.relationships.user_picture.data.id" src="http://localhost/{{user.attributes.url}}" class="circle">
+                <img *ngIf="user.id==include.relationships.user_picture.data.id" src="http://localhost/{{user.attributes.url}}" class="circle">
             </span>
             <span class="title">{{include.attributes.name}}</span>
             <p>
               <a href="mailto:{{include.attributes.mail}}">{{include.attributes.mail}}</a>
             </p>
           </li>
-
-          {{include.relationships.user_picture.data.id}}
         </ul>
-
-        <img *ngIf="include.id==post.relationships.field_image.data.id" src="http://localhost/{{include.attributes.url}}" alt="" class="circle">
-
-      </div>
+          <div *ngIf="post.relationships.field_image.data" class="row">
+            <img *ngIf="include.id==post.relationships.field_image.data.id" src="http://localhost/{{include.attributes.url}}" class="col s12">
+          </div>
+        </div>
       <p [innerHTML]='post.attributes.body.processed | trustHtml'></p>
 
       <a class="btn waves-effect waves-light" routerLink="/posts/{{post.id}}/edit">Edit </a>

@@ -7,7 +7,9 @@
   <ul class="collection">
     <li class="collection-item avatar" *ngFor="let post of posts">
       <div *ngFor="let include of includes">
+        <div *ngIf="post.relationships.field_image.data">
           <img *ngIf="include.id==post.relationships.field_image.data.id" src="http://localhost/{{include.attributes.url}}" alt="" class="circle">
+        </div>
       </div>
       <a routerLink="/posts/{{post.id}}"><span class="title">{{post.attributes.title}}</span></a>
       <p><span *ngFor="let include of includes"><span *ngIf="include.id==post.relationships.revision_uid.data.id">{{include.attributes.name}}</span></span><br>

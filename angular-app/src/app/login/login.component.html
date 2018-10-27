@@ -6,15 +6,16 @@
 
     <div class="input-field">
       <i class="material-icons prefix">account_circle</i>
-      <input id="username" name="username" type="text" class="validate" [(ngModel)]="username">
+      <input id="username" name="username" type="text" [(ngModel)]="username">
       <label for="username">username</label>
     </div>
 
     <div class="input-field">
       <i class="material-icons prefix">vpn_key</i>
-      <input id="password" name="password" type="password" class="form-control" [(ngModel)]="password">
+      <input id="password" name="password" type="password" [(ngModel)]="password">
       <label for="password">password</label>
     </div>
+    <span class="helper-text">{{errorMessage}}</span>
 
     <button class="btn waves-effect waves-light login-btn" type="submit">Login
     </button>
