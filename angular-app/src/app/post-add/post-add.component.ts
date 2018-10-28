@@ -13,7 +13,7 @@ export class PostAddComponent implements OnInit {
   title: string;
   content: string;
   summary: string;
-  jsonFormat: Post;
+  jsonFormat: Json;
 
   post: Post;
   constructor(

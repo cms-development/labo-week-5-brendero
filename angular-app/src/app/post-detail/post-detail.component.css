@@ -1,3 +1,10 @@
 .post-wrapper {
   margin-top: 70px;
 }
+.btnColor {
+  background: #68EFAD;
+  margin-right: 20px;
+}
+.cardColor {
+  background: #68EFAD!important;
+}

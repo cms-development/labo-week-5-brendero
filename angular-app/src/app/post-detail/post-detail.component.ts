@@ -1,3 +1,4 @@
+import { Json } from './../Json';
 import { PostService } from './../postservice/post.service';
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../post';
@@ -10,7 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./post-detail.component.css']
 })
 export class PostDetailComponent implements OnInit {
-  post: Post;
+  post: Json;
   includes: Post;
 
   constructor(

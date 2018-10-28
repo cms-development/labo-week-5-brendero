@@ -1,6 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<nav class="center drupal-navigation">
-  {{title}}
+<nav class="nav-wrapper drupal-navigation">
+
+  <a class="brand-logo center">{{title}}</a>
+  <ul class="left" *ngIf="router.url != '/login'">
+    <li><a routerLink="/logout"><i class="material-icons">input</i>Logout</a></li>
+  </ul>
+
 </nav>
 
 <router-outlet></router-outlet>

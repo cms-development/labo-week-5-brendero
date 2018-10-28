@@ -31,12 +31,10 @@ export class PostService {
     ) { }
 
   // TODO: CREATE
-  addPost(post: Post): Observable<Post> {
-    console.log(post);
+  addPost(post: Json): Observable<Post> {
     return this.http.post<Post>('http://localhost/jsonapi/node/article', post, httpOptions)
           .pipe(
-            tap((post: Post) => this.log(`added new post with id ${post.id}`)),
-            catchError(this.handleError<Post>('addPost'))
+            tap((post: Post) => this.log(`added new post with id ${post.id}`))
           );
   }
 
@@ -61,10 +59,10 @@ export class PostService {
   }
 
   // UPDATE
-  updatePost (post: Post): Observable<Post> {
+  updatePost (post: Json): Observable<Post> {
     return this.http.patch(`http://localhost/jsonapi/node/article/${post.data.id}`, post, httpOptions)
     .pipe(
-      tap(_ => this.log(`updated Post with id=${post.id}`)),
+      tap(_ => this.log(`updated Post with id=${post.data.id}`)),
       catchError(this.handleError<any>('updatePost'))
     );
   }
@@ -77,7 +75,6 @@ export class PostService {
 
     return this.http.delete<Post>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted post id=${id}`)),
-      catchError(this.handleError<Post>('deletePost'))
     );
   }
 

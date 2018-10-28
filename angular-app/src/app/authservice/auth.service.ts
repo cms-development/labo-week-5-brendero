@@ -1,3 +1,4 @@
+import { AuthToken } from './../authToken';
 import { catchError } from 'rxjs/operators';
 import { User } from './../user';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -31,8 +32,26 @@ export class AuthService {
                   .set('username', username)
                   .set('password', password);
 
-    return this.http.post<User>(this.tokenUrl, httpBody, httpOptions);
-
+    return this.http.post<AuthToken>(this.tokenUrl, httpBody, httpOptions);
   }
 
+  refreshLogin() {
+    const httpBody = new HttpParams()
+                    .set('grant_type', 'refresh_token')
+                    .set('client_id', this.client_id)
+                    .set('client_secret', this.client_secret)
+                    .set('refresh_token', localStorage.getItem('refresh_token'));
+
+    return this.http.post<AuthToken>(this.tokenUrl, httpBody, httpOptions);
+  }
+
+  logOut() {
+    const httpBody = new HttpParams()
+                    .set('client_id', this.client_id)
+                    .set('client_secret', this.client_secret)
+                    .set('token', localStorage.getItem('refresh_token'));
+
+    this.http.post('http://localhost/oauth/revoke', httpBody, httpOptions);
+    localStorage.clear();
+  }
 }

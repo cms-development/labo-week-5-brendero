@@ -23,9 +23,19 @@
         </div>
       <p [innerHTML]='post.attributes.body.processed | trustHtml'></p>
 
-      <a class="btn waves-effect waves-light" routerLink="/posts/{{post.id}}/edit">Edit </a>
+      <div class="row">
+        <div class="col s12">
+          <div class="card-panel cardColor">
+            <span class="white-text">
+              <strong>TL;DR</strong> {{post.attributes.body.summary}}
+            </span>
+          </div>
+        </div>
+      </div>
 
-      <button class="btn waves-effect waves-light" (click)="delete(post)">delete
+      <a class="btn waves-effect waves-light btnColor" routerLink="/posts/{{post.id}}/edit">Edit </a>
+
+      <button class="btn waves-effect waves-light btnColor" (click)="delete(post)">delete
         <i class="material-icons right">delete</i>
       </button>
     </div>

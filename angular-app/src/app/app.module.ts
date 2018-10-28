@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './interceptors/auth-interceptors';
 import { SplitPipe } from './pipeservice/pipe.service';
 import { TrustHtmlPipe } from './pipeService/pipe.service';
 
@@ -11,10 +12,11 @@ import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { MessagesComponent } from './messages/messages.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { PostEditComponent } from './post-edit/post-edit.component';
 import { PostAddComponent } from './post-add/post-add.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { PostAddComponent } from './post-add/post-add.component';
     LoginComponent,
     PostEditComponent,
     PostAddComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,13 @@ import { PostAddComponent } from './post-add/post-add.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

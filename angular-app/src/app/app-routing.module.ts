@@ -1,3 +1,4 @@
+import { LogoutComponent } from './logout/logout.component';
 import { PostAddComponent } from './post-add/post-add.component';
 import { PostEditComponent } from './post-edit/post-edit.component';
 import { LoginComponent } from './login/login.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'posts/:id', component: PostDetailComponent},
   {path: 'posts/:id/edit', component: PostEditComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'logout', component: LogoutComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

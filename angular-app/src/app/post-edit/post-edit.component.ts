@@ -16,7 +16,7 @@ export class PostEditComponent implements OnInit {
   title: string;
   content: string;
   summary: string;
-  jsonFormat: Post;
+  jsonFormat: Json;
   postData: Post;
 
   constructor(
