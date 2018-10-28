@@ -10,16 +10,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = req.clone({
-      setHeaders: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-      }
-    });
+    this.setHeader(req);
     return next.handle(req).pipe(
       tap(
         evt => evt,
@@ -37,15 +32,23 @@ export class AuthInterceptor implements HttpInterceptor {
     );
   }
 
+  setHeader(req: HttpRequest<any>) {
+    return req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+      }
+    });
+
+  }
+
   refreshTokens(req: HttpRequest<any>, next: HttpHandler) {
     this.authService.refreshLogin()
       .subscribe(
-          user => {
-            localStorage.setItem('access_token', user.access_token);
-            localStorage.setItem('refresh_token', user.refresh_token);
-            return next.handle(req.clone({setHeaders: {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': `Bearer ${user.access_token}`}}));
+          tokens => {
+            localStorage.setItem('access_token', tokens.access_token);
+            localStorage.setItem('refresh_token', tokens.refresh_token);
+            return next.handle(this.setHeader(req)).subscribe();
           }, err => {
-            console.log(err);
             localStorage.clear();
             return this.router.navigateByUrl('/login');
           }

@@ -34,7 +34,8 @@ export class PostService {
   addPost(post: Json): Observable<Post> {
     return this.http.post<Post>('http://localhost/jsonapi/node/article', post, httpOptions)
           .pipe(
-            tap((post: Post) => this.log(`added new post with id ${post.id}`))
+            tap((post: Post) => this.log(`added new post with id ${post.id}`)),
+            catchError(this.handleError<Post>('addPost'))
           );
   }
 
@@ -75,6 +76,7 @@ export class PostService {
 
     return this.http.delete<Post>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted post id=${id}`)),
+      catchError(this.handleError<Post>('deletePost'))
     );
   }
 
