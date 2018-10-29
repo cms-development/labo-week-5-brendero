@@ -1,3 +1,4 @@
+import { FileReaderService } from './../fiereaderservice/file-reader.service';
 import { Json } from './../Json';
 import { Location } from '@angular/common';
 import { PostService } from './../postservice/post.service';
@@ -14,14 +15,31 @@ export class PostAddComponent implements OnInit {
   content: string;
   summary: string;
   jsonFormat: Json;
-
+  image64: string;
   post: Post;
+
   constructor(
     private postService: PostService,
-    private location: Location
+    private location: Location,
+    private fileReaderService: FileReaderService
   ) { }
 
   ngOnInit() {
+  }
+
+  changeListener($event): void {
+    this.readThis($event.target);
+  }
+
+  readThis(inputValue: any): void {
+    const file: File = inputValue.files[0];
+
+    console.log(file);
+    this.fileReaderService.readFile(file)
+        .subscribe(data => {
+          this.image64 = data;
+          console.log(this.image64);
+        });
   }
 
   addPost(): void {
